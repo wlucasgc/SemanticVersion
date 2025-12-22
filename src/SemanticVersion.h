@@ -23,6 +23,13 @@ class SemanticVersion {
         const uint16_t patch() const;
         
         const String toString() const;
+
+        const bool operator==(const SemanticVersion& other) const;
+        const bool operator!=(const SemanticVersion& other) const;
+        const bool operator<(const SemanticVersion& other) const;
+        const bool operator>(const SemanticVersion& other) const;
+        const bool operator<=(const SemanticVersion& other) const;
+        const bool operator>=(const SemanticVersion& other) const;
 };
 
 #endif

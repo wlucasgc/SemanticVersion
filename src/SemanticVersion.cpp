@@ -69,3 +69,111 @@ const String SemanticVersion::toString() const {
 }
 
 //=================================================================================================
+// OPERATIONS
+//=================================================================================================
+
+const bool SemanticVersion::operator==(const SemanticVersion& other) const {
+    return(this->_major == other._major && this->_minor == other._minor && this->_patch == other._patch);
+}
+
+const bool SemanticVersion::operator!=(const SemanticVersion& other) const {
+    return(this->_major != other._major || this->_minor != other._minor || this->_patch != other._patch);
+}
+
+const bool SemanticVersion::operator<(const SemanticVersion& other) const {
+    if(this->_major > other._major) {
+        return(false);
+    }
+    
+    if(this->_major < other._major) {
+        return(true);
+    }
+    
+    if(this->_minor > other._minor) {
+        return(false);
+    }
+    
+    if(this->_minor < other._minor) {
+        return(true);
+    }
+
+    if(this->_patch >= other._patch) {
+        return(false);
+    }
+    
+    return(true);
+}
+
+const bool SemanticVersion::operator>(const SemanticVersion& other) const {
+    if(this->_major < other._major) {
+        return(false);
+    }
+
+    if(this->_major > other._major) {
+        return(true);
+    }
+    
+    if(this->_minor < other._minor) {
+        return(false);
+    }
+
+    if(this->_minor > other._minor) {
+        return(true);
+    }
+    
+    if(this->_patch <= other._patch) {
+        return(false);
+    }
+    
+    return(true);
+}
+
+const bool SemanticVersion::operator<=(const SemanticVersion& other) const {
+    if(this->_major > other._major) {
+        return(false);
+    }
+
+    if(this->_major < other._major) {
+        return(true);
+    }
+    
+    if(this->_minor > other._minor) {
+        return(false);
+    }
+
+    if(this->_minor < other._minor) {
+        return(true);
+    }
+    
+    if(this->_patch > other._patch) {
+        return(false);
+    }
+    
+    return(true);
+}
+
+const bool SemanticVersion::operator>=(const SemanticVersion& other) const {
+    if(this->_major < other._major) {
+        return(false);
+    }
+
+    if(this->_major > other._major) {
+        return(true);
+    }
+    
+    if(this->_minor < other._minor) {
+        return(false);
+    }
+
+    if(this->_minor > other._minor) {
+        return(true);
+    }
+    
+    if(this->_patch < other._patch) {
+        return(false);
+    }
+    
+    return(true);
+}
+
+//=================================================================================================
