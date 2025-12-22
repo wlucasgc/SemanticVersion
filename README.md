@@ -17,6 +17,7 @@ This library abstracts it into a simple `SemanticVersion` class, perfect for:
 ## Features
 
 - **Creation**: Create a `SemanticVersion` object from major, minor and patch numbers.
+- **Parsing**: Convert strings like `"1.2.3"` into `SemanticVersion` objects.
 - **Serial Output**: Print versions in human-readable formats.
 
 ## Quick Start
@@ -30,12 +31,14 @@ This library abstracts it into a simple `SemanticVersion` class, perfect for:
 ```cpp
 #include <SemanticVersion.h>
 
-SemanticVersion version(1, 2, 3);
+SemanticVersion current(1, 2, 3);
+SemanticVersion latest("1.3.0");
 
 void setup() {
     Serial.begin(9600);
 
-    Serial.println("Version: " + version.toString());
+    Serial.println("Current: " + current.toString());
+    Serial.println("Latest:  " + latest.toString());
 }
 
 void loop() {}
@@ -45,6 +48,7 @@ void loop() {}
 
 - `SemanticVersion()`: Default constructor (0.0.0).
 - `SemanticVersion(const uint16_t major, const uint16_t minor, const uint16_t patch)`: Constructor from major, minor and patch.
+- `SemanticVersion(const String& version)`: Constructor from string.
 - `const uint16_t major() const`, `const uint16_t minor() const`, `const uint16_t patch() const`: Access components.
 - `const String toString() const`: Formatted string output.
 
