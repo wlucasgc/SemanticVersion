@@ -16,6 +16,7 @@ class SemanticVersion {
     public:
         explicit SemanticVersion();
         explicit SemanticVersion(const uint16_t& major, const uint16_t& minor, const uint16_t& patch);
+        explicit SemanticVersion(const String& versionString);
         
         const uint16_t major() const;
         const uint16_t minor() const;
