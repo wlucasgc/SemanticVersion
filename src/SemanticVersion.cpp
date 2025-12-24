@@ -16,10 +16,11 @@ SemanticVersion::SemanticVersion():
 // CONSTRUCTOR 2
 //=================================================================================================
 
-SemanticVersion::SemanticVersion(const uint16_t& major, const uint16_t& minor, const uint16_t& patch):
+SemanticVersion::SemanticVersion(const uint16_t& major, const uint16_t& minor, const uint16_t& patch, const String& suffix):
     _major(major),
     _minor(minor),
-    _patch(patch) {
+    _patch(patch),
+    _suffix(suffix) {
 }
 
 //=================================================================================================
@@ -27,7 +28,18 @@ SemanticVersion::SemanticVersion(const uint16_t& major, const uint16_t& minor, c
 //=================================================================================================
 
 SemanticVersion::SemanticVersion(const String& versionString) {
-    sscanf(versionString.c_str(), "%d.%d.%d", &this->_major, &this->_minor, &this->_patch);
+    char buffer[versionString.length() + 1] = "";
+    
+    sscanf(
+        versionString.c_str(), 
+        versionString.startsWith("v") ? "v%d.%d.%d%s" : "%d.%d.%d%s",
+        &this->_major,
+        &this->_minor,
+        &this->_patch,
+        buffer
+    );
+    
+    this->_suffix = String(buffer);
 }
 
 //=================================================================================================
@@ -55,6 +67,14 @@ const uint16_t SemanticVersion::patch() const {
 }
 
 //=================================================================================================
+// SUFFIX
+//=================================================================================================
+
+const String SemanticVersion::suffix() const {
+    return(this->_suffix);
+}
+
+//=================================================================================================
 // SOFTWARE VERSION AS A STRING
 //=================================================================================================
 
@@ -65,6 +85,7 @@ const String SemanticVersion::toString(const bool v) const {
     versionString += String(this->_major) + ".";
     versionString += String(this->_minor) + ".";
     versionString += String(this->_patch);
+    versionString += this->_suffix;
 
     return(versionString);
 }
@@ -74,11 +95,11 @@ const String SemanticVersion::toString(const bool v) const {
 //=================================================================================================
 
 const bool SemanticVersion::operator==(const SemanticVersion& other) const {
-    return(this->_major == other._major && this->_minor == other._minor && this->_patch == other._patch);
+    return(this->_major == other._major && this->_minor == other._minor && this->_patch == other._patch && this->_suffix == other._suffix);
 }
 
 const bool SemanticVersion::operator!=(const SemanticVersion& other) const {
-    return(this->_major != other._major || this->_minor != other._minor || this->_patch != other._patch);
+    return(this->_major != other._major || this->_minor != other._minor || this->_patch != other._patch || this->_suffix != other._suffix);
 }
 
 const bool SemanticVersion::operator<(const SemanticVersion& other) const {
