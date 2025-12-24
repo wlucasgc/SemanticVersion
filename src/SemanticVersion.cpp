@@ -58,9 +58,10 @@ const uint16_t SemanticVersion::patch() const {
 // SOFTWARE VERSION AS A STRING
 //=================================================================================================
 
-const String SemanticVersion::toString() const {
+const String SemanticVersion::toString(const bool v) const {
     String versionString;
     
+    versionString += v ? "v" : "";
     versionString += String(this->_major) + ".";
     versionString += String(this->_minor) + ".";
     versionString += String(this->_patch);

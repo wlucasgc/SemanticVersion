@@ -12,7 +12,7 @@ class SemanticVersion {
         uint16_t _major;
         uint16_t _minor;
         uint16_t _patch;
-
+        
     public:
         explicit SemanticVersion();
         explicit SemanticVersion(const uint16_t& major, const uint16_t& minor, const uint16_t& patch);
@@ -22,7 +22,7 @@ class SemanticVersion {
         const uint16_t minor() const;
         const uint16_t patch() const;
         
-        const String toString() const;
+        const String toString(const bool v = false) const;
 
         const bool operator==(const SemanticVersion& other) const;
         const bool operator!=(const SemanticVersion& other) const;
